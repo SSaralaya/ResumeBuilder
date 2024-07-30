@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="inputForm">
+    <div class="jumbotron">
+      <h1 class="display-4 text-center"><strong>Resume Builder</strong></h1>
+    </div>
+
+    <div class="container">
+      <div class="row heading">
+        <h4>About Yourself</h4>
+      </div>
+      <div class="row">
+        <textarea name="about" id="about" class="form-control col-lg-12  mt-2"></textarea>
+      </div>
+      <div class="row heading">
+        <h4>Personal Details</h4>
+      </div>
+      <div class="row">
+        <label for="firstname" class="col-lg-3">First Name</label>
+        <input type="text" class="form-control col-lg-3" name="FName" id="firstName" />
+        <label for="lastname" class="col-lg-3 text-lg-right">Last Name</label>
+        <input type="text" class="form-control col-lg-3" name="LName" id="lastName" />
+      </div>
+      <div class="row">
+        <label for="contact" class="col-lg-3">Contact Number</label>
+        <input type="tel" class="form-control col-lg-3" name="cNo" id="cNo" min="0" onkeyup="validatePhoneNumber()"/>
+        <label for="emailId" class="col-lg-3 text-lg-right">Email ID</label>
+        <input type="email" class="form-control col-lg-3" name="email" id="email" title="Please enter a valid email" onkeyup="validateEmail()" required />
+      </div>
+      <div class="row">
+        <p class="col-lg-3"></p>
+        <p  id="invalid-phone" class="col-lg-3">
+          <small>Invalid Phone number</small>
+        </p>
+        <p class="col-lg-3"></p>
+        <p  id="invalid-email" class="col-lg-3 text-right">
+          <small>Invalid Email address</small>
+        </p>
+      </div>
+
+      <div class="row heading">
+        <h4>Educational Details</h4>
+      </div>
+      <div class="row">
+        <label for="presentEducation" class="col-lg-3">Present Education</label>
+        <input type="text" class="form-control col-lg-3" name="presentDegree" id="presentDegree">
+      </div>
+      <div class="row">
+        <label for="presentCollege" class="col-lg-3">College Name</label>
+        <input type="text" class="form-control col-lg-3" id="presentCollege" />
+
+        <label for="CGPA" class="col-lg-3 text-lg-right">CGPA</label>
+        <input type="number" class="form-control col-lg-3" id="presentCGPA" />
+      </div>
+
+      <div class="row">
+        <label for="previousDegree" class="col-lg-3">Previous Education</label>
+        <input type="text" class="form-control col-lg-3" name="previousDegree" id="previousDegree">
+      </div>
+      <div class="row" id="eduContainer">
+        <label for="bachelorsCollege" class="col-lg-3">College Name</label>
+        <input type="text" class="form-control col-lg-3" id="previousCollege" />
+
+        <label for="bachelorsCGPA" class="col-lg-3 text-lg-right">CGPA</label>
+        <input type="number" class="form-control col-lg-3" id="previousCGPA" />
+
+        
+      </div>
+      <div  id="addEdu" class="row">
+        
+        <div class="container" id="eduButton">
+          <button class="btn btn-outline-primary btn-sm mt-2 mb-4" onclick="addNewEdu()" >Add
+          </button>
+          <button class="btn btn-outline-primary btn-sm mt-2 mb-4" onclick="removeEdu()">Remove
+          </button>
+        </div>
+        
+      </div>
+
+    
+      <div class="row heading">
+        <h4>Skills</h4>
+      </div>
+
+      <div class="form-group row" id="skillContainer">
+        <input type="text" name="skill" id="skill1" class="form-control col-lg-2 ml-3 mt-2 mr-2">
+        <input type="text" name="skill" id="skill2" class="form-control col-lg-2 ml-3 mt-2 mr-2">
+        <input type="text" name="skill" id="skill3" class="form-control col-lg-2 ml-3 mt-2 mr-2">
+        <input type="text" name="skill" id="skill4" class="form-control col-lg-2 ml-3 mt-2 mr-2">
+        <input type="text" name="skill" id="skill5" class="form-control col-lg-2 ml-3 mt-2 mr-2">
+        <!-- new textArea will add here -->
+        <div class="container" id="addSkill">
+          <button class="btn btn-outline-primary btn-sm mt-2" onclick="addNewSkill()">Add
+          </button>
+          <button class="btn btn-outline-primary btn-sm mt-2" onclick="removeSkill()">Remove
+          </button>
+        </div>
+      </div>
+
+      <div class="row heading">
+        <h4>Projects</h4>
+      </div>
+
+      <div class="form-group row" id="projectContainer">
+        <label for="title" class="col-lg-3" id="titleLabel1">Project Title</label>
+        <input type="text" name="projectTitle" id="projectTitle1" class="form-control col-lg-9 ">
+        <label for="Description" class="col-lg-3 mt-2" id="descLabel1">Project Description</label>
+        <textarea name="projectDesc" id="projectDesc1" class="form-control col-lg-9  mt-2"></textarea>
+        <div class="container" id="addProjects">
+          <button class="btn btn-outline-primary btn-sm mt-2" onclick="addNewProject()">Add
+          </button>
+          <button class="btn btn-outline-primary btn-sm mt-2" onclick="removeProject()">Remove
+          </button>
+
+        </div>
+      </div>
+
+      <div class="row heading">
+        <h4>Certifications</h4>
+      </div>
+
+      <div class="row" id="certificateContainer">
+        <label for="certification1" class="col-3 mt-2">Certification Course Name </label>
+        <input type="text" name="certification" id="certification1" class="form-control col-9  mt-2 ">
+        <div class="container" id="addCertification">
+          <button class="btn btn-outline-primary btn-sm mt-2" onclick="addNewCertification()">Add
+          </button>
+          <button class="btn btn-outline-primary btn-sm mt-2" onclick="removeCertification()">Remove
+          </button>
+        </div>
+      </div>
+
+      <div class="row heading">
+        <h4>Interests</h4>
+      </div>
+      <div class="row">
+        <label for="interest" class="col-lg-3">Your Interests <br> </label>
+        <textarea name="interests" id="interest" class="col-lg-9 form-control"
+          placeholder="Specify ',' between two interests"></textarea>
+      </div>
+
+      <div class="row heading">
+        <h4>Social Platform Links</h4>
+      </div>
+      <div class="row">
+        <label for="linkedin" class="col-lg-3">LinkedIn</label>
+        <input type="text" id="linkedin" class="form-control col-lg-3" />
+
+        <label for="Github" class="col-lg-3 text-lg-right">Github</label>
+        <input type="text" id="github" class="form-control col-lg-3" />
+      </div>
+
+
+      <button type="submit" class="btn btn-primary mb-4 mt-4 float-right" onclick="generateResume()">
+        Generate
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Resume Template -->
+  <div class="container mt-5" id="template">
+    <div class="row" id="printable">
+      <div class="col-md-10 offset-md-1">
+        <div class="card">
+          <div class="card-header ">
+            <h1 class="text-center" id="fullName"><strong></strong></h2>
+              <p class="text-center"><b>IT Fresher</b></p>
+          </div>
+          <div class="card-body">
+            <div class="card-text" id="resumeAbout">
+              I'm a passionate and dedicated student with a fervent
+              enthusiasm for coding and problem solving, posessing a strong
+              foundation in theoretical concepts, coupled with hands-on
+              skills. I am committed to continous learning and growth in the
+              realm of software development. I aspire to carve a path as a
+              profiecient software developer.
+            </div>
+            <hr />
+            <div class="row">
+              <h4 class="col-4">Personal Information</h4>
+            </div>
+            
+            <div class="row">
+              <div class="col-6">
+                <img src="email.svg" alt="EmailIdSVG" width="15px" height="15px" style="margin-left: 2px;;">
+                <p id ="resumeEmail" style="display: inline-block; margin-left: 5px;"></p>
+              </div>
+              <div class="col-6">
+                <img src="phone.svg" alt="PhoneNumberSVG"  width="15px" height="15px">
+                <p  id ="resumePhone" style="display: inline-block; margin-left: 5px;"></p>
+              </div>
+              <div class="col-6">
+                <img src="linkedin.svg" alt="LinkedinSVG"  width="20px" height="17px">
+                <p id="resumeLinkedin" style="display: inline-block; margin-left: 5px;"></p>
+              </div>
+              <div class="col-6">
+                <img src="github.svg" alt="GithubSVG" width="17px" height="15px">
+                <p id="resumeGithub" style="display: inline-block; margin-left: 5px;"></p>
+              </div>
+              
+            </div>
+            <hr />
+            <div class="row">
+              <h4 class="col-12">Education</h4>
+            </div>
+            <div class="row">
+              <ul class="col-12 edu">
+                <li>
+                  <strong id="rPresentCourse"></strong>
+                  <ul id="presentEducation">
+                  </ul>
+                </li>
+              </ul>
+              <ul class="col-12 edu">
+                <li>
+                  <strong id="rPreviousCourse"></strong>
+                  <ul id="previousEducation">
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <hr />
+            <div class="row">
+              <h4 class="col-12">Skills</h4>
+            </div>
+            <div>
+              <ul id="skillSet1" class="row">
+              </ul>
+            </div>
+            <hr />
+
+            <div class="row">
+              <h4 class="col-12">Projects</h4>
+            </div>
+
+            <dl>
+              <ul id="rProjects">
+              </ul>
+            </dl>
+
+            <div id="parentDiv">
+              <div class="row" id="rCertHeading">
+              </div>
+              <div>
+                <ul class="row" id="rCertificate">
+                </ul>
+              </div>
+            </div>
+
+            <hr>
+            <div class="row">
+              <h4 class="col-12">Interests</h4>
+            </div>
+            <div>
+              <ul class="row" id="rInterests">
+              </ul>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container row">
+      <button type="submit" class="btn btn-primary mt-4 mb-4  offset-md-10" onclick="printDiv()">Print</button>
+    </div>
+  </div>
+
+</body>
+
+</html>
